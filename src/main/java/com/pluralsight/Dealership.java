@@ -1,96 +1,123 @@
 package com.pluralsight;
 
 import java.util.ArrayList;
-import java.util.List;
 
+// Represents a car dealership and provides methods to manage its inventory of vehicles.
 public class Dealership {
-    //  hold information about the dealership
-    //  maintain a list of vehicles
-    //  methods that search the list for matching vehicles
-    //  add/remove vehicles
-
-    //Dealership info
+    // Basic information about the dealership
     private String name;
     private String address;
-    private String phoneNumber;
-    private List<Vehicle> inventory; // creates a new list called inventory to store vehicles
+    private String phone;
 
-    //constructor
-    public Dealership(String name, String address, String phoneNumber) {
+    // The list of vehicles the dealership currently has
+    private ArrayList<Vehicle> inventory;
+
+    // Constructor: sets up dealership info and starts with an empty list
+    public Dealership(String name, String address, String phone) {
         this.name = name;
         this.address = address;
-        this.phoneNumber = phoneNumber;
-        //when a dealership (garage) is created, it also creates an empty list (parking lot) to hold vehicle objects
-        this.inventory = inventory != null ? inventory : new ArrayList<>(); //instantiated object in constructor
+        this.phone = phone;
+        this.inventory = new ArrayList<Vehicle>();
     }
 
-    //getters
-    public String getName() {
-        return name;
+    // Adds a new vehicle to the list
+    public void addVehicle(Vehicle vehicle) {
+        inventory.add(vehicle);
     }
 
-    public String getAddress() {
-        return address;
+    // Removes a vehicle based on VIN match
+    public void removeVehicle(Vehicle vehicle) {
+        for (int i = 0; i < inventory.size(); i++) {
+            if (inventory.get(i).getVin() == vehicle.getVin()) {
+                inventory.remove(i); // stop after removing first match
+                break;
+            }
+        }
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    // Returns the entire vehicle list
+    public ArrayList<Vehicle> getAllVehicles() {
+        return inventory;
     }
 
-    //setters
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    // methods
-    public List<Vehicle> getVehiclesByPrice(double min, double max) {
-        List<Vehicle> results = new ArrayList<>();
-        for (Vehicle v : inventory) {
-            if (v.getPrice() >= min && v.getPrice() <= max) {
-                results.add(v);
+    // Returns vehicles between the given price range
+    public ArrayList<Vehicle> getVehiclesByPrice(double min, double max) {
+        ArrayList<Vehicle> results = new ArrayList<Vehicle>();
+        for (Vehicle vehicle : inventory) {
+            if (vehicle.getPrice() >= min && vehicle.getPrice() <= max) {
+                results.add(vehicle);
             }
         }
         return results;
     }
 
-    public List<Vehicle> getvehiclesByMakeModel(String make, String model){
-        return new ArrayList<>();
+    // Returns vehicles that match both make and model
+    public ArrayList<Vehicle> getVehiclesByMakeModel(String make, String model) {
+        ArrayList<Vehicle> results = new ArrayList<Vehicle>();
+        for (Vehicle vehicle : inventory) {
+            if (vehicle.getMake().equalsIgnoreCase(make) && vehicle.getModel().equalsIgnoreCase(model)) {
+                results.add(vehicle);
+            }
+        }
+        return results;
     }
 
-    public List<Vehicle> getvehiclesByYear(int year){
-        return new ArrayList<>();
+    // Returns vehicles within the year range provided
+    public ArrayList<Vehicle> getVehiclesByYear(int minYear, int maxYear) {
+        ArrayList<Vehicle> results = new ArrayList<Vehicle>();
+        for (Vehicle vehicle : inventory) {
+            if (vehicle.getYear() >= minYear && vehicle.getYear() <= maxYear) {
+                results.add(vehicle);
+            }
+        }
+        return results;
     }
 
-    public List<Vehicle> getvehiclesByColor(String color){
-        return new ArrayList<>();
+    // Returns vehicles matching the specified color
+    public ArrayList<Vehicle> getVehiclesByColor(String color) {
+        ArrayList<Vehicle> results = new ArrayList<Vehicle>();
+        for (Vehicle vehicle : inventory) {
+            if (vehicle.getColor().equalsIgnoreCase(color)) {
+                results.add(vehicle);
+            }
+        }
+        return results;
     }
 
-    public List<Vehicle> getvehiclesByMilage(int mileage){
-        return new ArrayList<>();
+    // Returns vehicles within the specified mileage range
+    public ArrayList<Vehicle> getVehiclesByMileage(int minMileage, int maxMileage) {
+        ArrayList<Vehicle> results = new ArrayList<Vehicle>();
+        for (Vehicle vehicle : inventory) {
+            if (vehicle.getOdometer() >= minMileage && vehicle.getOdometer() <= maxMileage) {
+                results.add(vehicle);
+            }
+        }
+        return results;
     }
 
-    public List<Vehicle> getvehiclesByType(String vehicleType){
-        return new ArrayList<>();
+    // Returns vehicle by vin
+    public Vehicle getVehicleByVin(int vin) {
+        for (Vehicle vehicle : inventory) {
+            if (vehicle.getVin() == vin) {
+                return vehicle;
+            }
+        }
+        return null;
     }
 
-    public List<Vehicle> getAllVehicles(){
-        return inventory;
+    // Returns vehicles that match the vehicle type
+    public ArrayList<Vehicle> getVehiclesByType(String type) {
+        ArrayList<Vehicle> results = new ArrayList<Vehicle>();
+        for (Vehicle vehicle : inventory) {
+            if (vehicle.getVehicleType().equalsIgnoreCase(type)) {
+                results.add(vehicle);
+            }
+        }
+        return results;
     }
 
-    public void addVehicle(Vehicle vehicle) {
-        inventory.add(vehicle);
-    }
-
-    public void removeVehicle(Vehicle vehicle) {
-        inventory.remove(vehicle);
-    }
+    // Getters for dealership name, address, and phone
+    public String getName() { return name; }
+    public String getAddress() { return address; }
+    public String getPhone() { return phone; }
 }
