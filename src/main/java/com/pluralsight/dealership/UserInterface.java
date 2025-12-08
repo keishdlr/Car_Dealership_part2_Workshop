@@ -1,4 +1,4 @@
-package com.pluralsight;
+package com.pluralsight.dealership;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -230,14 +230,16 @@ public class UserInterface {
             }
         }
 
-        // Example of equivalent long form loop:
-        // for (int index = 0; index < dealership.getAllVehicles().size(); index++) {
-        //     Vehicle currentVehicle = dealership.getAllVehicles().get(index);
-        //     if (currentVehicle.getVin() == vin) {
-        //         vehicleToRemove = currentVehicle;
-        //         break;
-        //     }
-        // }
+        /*
+         Example of equivalent long form loop:
+         for (int index = 0; index < dealership.getAllVehicles().size(); index++) {
+             Vehicle currentVehicle = dealership.getAllVehicles().get(index);
+             if (currentVehicle.getVin() == vin) {
+                 vehicleToRemove = currentVehicle;
+                 break;
+             }
+         }
+        */
 
         if (vehicleToRemove != null) {
             dealership.removeVehicle(vehicleToRemove);
@@ -258,11 +260,13 @@ public class UserInterface {
                 System.out.println(currentVehicle);
             }
 
-            // Example of equivalent long form loop:
-            // for (int index = 0; index < vehicleList.size(); index++) {
-            //     Vehicle currentVehicle = vehicleList.get(index);
-            //     System.out.println(currentVehicle);
-            // }
+            /*
+             Example of equivalent long form loop:
+             for (int index = 0; index < vehicleList.size(); index++) {
+                 Vehicle currentVehicle = vehicleList.get(index);
+                 System.out.println(currentVehicle);
+             }
+            */
         }
     }
 
