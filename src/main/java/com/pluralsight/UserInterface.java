@@ -51,7 +51,7 @@ public class UserInterface {
 
         while (menuRunning) {
             // Show menu options
-            System.out.println("\n=== Car Dealership Menu ===");
+            System.out.println("\n=== Simba Car Dealership Menu ===");
             System.out.println("1 - Find vehicles by price");
             System.out.println("2 - Find vehicles by make/model");
             System.out.println("3 - Find vehicles by year range");
@@ -62,7 +62,7 @@ public class UserInterface {
             System.out.println("8 - Add a vehicle");
             System.out.println("9 - Remove a vehicle");
             System.out.println("10 - Sell/Lease a Vehicle");
-            System.out.println("99 - Quit");
+            System.out.println("0 - Quit");
             System.out.print("Enter option: ");
 
             // Read user input
@@ -87,7 +87,7 @@ public class UserInterface {
                 case 8: processAddVehicleRequest(); break;
                 case 9: processRemoveVehicleRequest(); break;
                 case 10: handleSellOrLease(); break;
-                case 99:
+                case 0:
                     System.out.println("Goodbye!");
                     menuRunning = false;
                     break;
