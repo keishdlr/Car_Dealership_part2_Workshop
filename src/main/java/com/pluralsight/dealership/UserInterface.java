@@ -1,5 +1,9 @@
 package com.pluralsight.dealership;
 
+import com.pluralsight.DAO.dealership.vehiclesDAO;
+import org.apache.commons.dbcp2.BasicDataSource;
+
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -7,9 +11,42 @@ import java.util.Scanner;
 // This class handles the console-based interaction with the user, displaying menus,
 // capturing input, and performing operations on the dealership.
 public class UserInterface {
+        //did we pass in a username and password
+        //if not, the application must die
+        if(args.length != 2){
+            //display a message to the user
+            System.out.println("Application needs two args to run: A username and a password for the db");
+            //exit the app due to failure because we don't have a username and password from the command line
+            System.exit(1);
+        }
+
+        //get the username and password from args[]
+        String username = args[0];
+        String password = args[1];
+
+        //create a scanner to ask the user some questions from our menu
+         Scanner myScanner = new Scanner(System.in);
+
+
+        //get the connection from the datasource
+        try (
+                //create the basic datasource
+                 BasicDataSource basicDataSource = new BasicDataSource()
+        ){
+
+            //set its configuration
+             basicDataSource.setUrl("jdbc:mysql://localhost:3306/cardealership");
+             basicDataSource.setUsername(username);
+             basicDataSource.setPassword(password);
+
+            vehiclesDAO vehicleDAO = new vehiclesDAO(basicDataSource);
+        }catch(
+            SQLException e){
+            System.out.println("Could not connect to DB");
+            System.exit(1);
+        }
 
     private static Dealership dealership;
-
     // Private constructor to prevent instantiation
     private UserInterface() {}
 
